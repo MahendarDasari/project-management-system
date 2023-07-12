@@ -1,4 +1,4 @@
-# Product Management System te
+# Product Management System
 
 Product management system help to manage (add, update, view and search) any kinds of products.
 1.	User can search product based on category and subcategory (Category: Electronics                      ->Subcategory (TV, Mobile and refrigerator), Apparel-> Subcategory (Men’s Cloth and Women’s cloth) and Footwear-> (Men’s Footwear and kid’s footwears)) – Category and sub-category list can be in memory/pre-defined list.
