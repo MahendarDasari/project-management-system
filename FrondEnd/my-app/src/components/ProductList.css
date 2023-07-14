@@ -24,7 +24,18 @@
   
 
   .product-list-container {
-    height: 400px; /* Adjust the height as needed */
-    overflow: auto Y;
+    height: 800px; /* Adjust the height as needed */
+    overflow: auto;
+    position: relative;
+  }
+  
+  .add-product-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    z-index: 1;
   }
   

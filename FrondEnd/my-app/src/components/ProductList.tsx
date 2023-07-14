@@ -72,6 +72,11 @@ const ProductList: React.FC = () => {
   // Apply custom styles
   return (
     <div className="product-list-container">
+    <div className="add-product-container">
+    <Button variant="contained" onClick={() => setShowModal(true)}>
+      Add Product
+    </Button>
+  </div>
     <StyledTable>
       <StyledTableHead>
         <TableRow>
@@ -96,8 +101,7 @@ const ProductList: React.FC = () => {
       </StyledTableBody>    
     </StyledTable>
 
-      {/* Render the add product button */}
-      <button onClick={() => setShowModal(true)}>Add Product</button>
+  
 
       {/* Render the add product modal */}
       <ProductAddComponent
