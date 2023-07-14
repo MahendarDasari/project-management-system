@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import productReducer from './productReducer';
-import { RootState } from '../types';
+import categoryReducer from './categoryReducer';
 
-const rootReducer = combineReducers<RootState>({
+const rootReducer = combineReducers({
   products: productReducer,
+  categories: categoryReducer,
 });
 
 export default rootReducer;

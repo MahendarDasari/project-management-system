@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Button, Modal, TextField, Grid } from '@mui/material';
-import { Product } from '../redux/types';
+import { Button, Modal, TextField, Grid, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Product, Category, Subcategory } from '../redux/types';
 import './ProductModelComponent.css'; // Import the CSS file
 
 interface ProductModelComponentProps {
   product: Product;
   onUpdate: (updatedProduct: Product) => void;
+  categories: Category[];
 }
 
-const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, onUpdate }) => {
+const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, onUpdate, categories }) => {
   const [open, setOpen] = useState(false);
-  const [updatedProduct, setUpdatedProduct] = useState(product);
+  const [updatedProduct, setUpdatedProduct] = useState<Product>(product);
 
   const handleOpen = () => {
     setOpen(true);
@@ -30,6 +31,23 @@ const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, 
     setUpdatedProduct((prevProduct) => ({
       ...prevProduct,
       [name]: value,
+    }));
+  };
+
+  // const handleCategoryChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+  //   const categoryId = e.target.value as number;
+  //   setUpdatedProduct((prevProduct) => ({
+  //     ...prevProduct,
+  //     categoryId,
+  //     subcategoryId: null,
+  //   }));
+  // };
+
+  const handleSubcategoryChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+    const subcategoryId = e.target.value as number;
+    setUpdatedProduct((prevProduct) => ({
+      ...prevProduct,
+      subcategoryId,
     }));
   };
 
@@ -55,7 +73,13 @@ const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, 
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField label="Price" name="price" value={updatedProduct.price} onChange={handleInputChange} fullWidth />
+              <TextField
+                label="Price"
+                name="price"
+                value={updatedProduct.price}
+                onChange={handleInputChange}
+                fullWidth
+              />
             </Grid>
             <Grid item xs={6}>
               <TextField
@@ -65,6 +89,33 @@ const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, 
                 onChange={handleInputChange}
                 fullWidth
               />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth>
+                <InputLabel>Category</InputLabel>
+                <Select value={updatedProduct.categoryId}>
+                  {categories.map((category: Category) => (
+                    <MenuItem key={category.id} value={category.id}>
+                      {category.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth>
+                <InputLabel>Subcategory</InputLabel>
+                <Select value={updatedProduct.subcategoryId}>
+                  {updatedProduct.categoryId &&
+                    categories
+                      .find((category: Category) => category.id === updatedProduct.categoryId)
+                      ?.subcategories.map((subcategory: Subcategory) => (
+                        <MenuItem key={subcategory.id} value={subcategory.id}>
+                          {subcategory.name}
+                        </MenuItem>
+                      ))}
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
           <Button variant="contained" onClick={handleSave}>

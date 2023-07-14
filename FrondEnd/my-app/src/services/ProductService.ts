@@ -6,11 +6,11 @@ class ProductService {
   private apiEndpoint = 'http://localhost:5159/api/products';
 
   fetchProducts(): Promise<Product[]> {
-    return axios.get('http://localhost:5159/api/products').then((response) => {console.log(response); return response.data;});
+    return axios.get('http://localhost:5159/api/products').then((response) => { return response.data;});
   }
 
-  addProduct(newProduct: NewProduct): Promise<void> {
-    return axios.post(this.apiEndpoint, newProduct);
+  addProduct(newProduct: NewProduct): Promise<Product> {
+    return axios.post('http://localhost:5159/api/products', newProduct).then((response) => { return response.data;});;
   }
 
   updateProduct(updatedProduct: Product): Promise<void> {
@@ -19,7 +19,7 @@ class ProductService {
   }
 
   deleteProduct(productId: number): Promise<void> {
-    return axios.delete(`${this.apiEndpoint}/${productId}`);
+    return axios.delete(`'http://localhost:5159/api/products'/${productId}`);
   }
 }
 

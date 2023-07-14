@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/types';
 
@@ -11,6 +11,8 @@ import { styled } from '@mui/system';
 
 import './ProductList.css'; // Import the CSS file
 import { blue, orange } from '@mui/material/colors';
+import ProductAddComponent from './ProductAddComponent';
+import { fetchCategories } from '../redux/actions/categoryActions';
 
 // Define custom styles using makeStyles
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -37,8 +39,13 @@ const StyledTableHead = styled(TableHead)({
 const ProductList: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products);
-
-
+  const categories = useSelector((state: RootState) => state.categories);
+  useEffect(() => {
+    // Fetch the categories on component mount
+    dispatch(fetchCategories());
+  }, [dispatch]);
+  
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     // Fetch the products on component mount
     dispatch(fetchProducts());
@@ -51,6 +58,7 @@ const ProductList: React.FC = () => {
 
   const handleUpdateProduct = (updatedProduct: Product) => {
     // Handle update product logic
+    console.log("updatedProduct",updatedProduct);
     dispatch(updateProduct(updatedProduct));
   };
 
@@ -82,28 +90,22 @@ const ProductList: React.FC = () => {
               product={product}
               onUpdate={handleUpdateProduct}
               onDelete={handleDeleteProduct}
+              categories={categories}
             />)
     )} 
       </StyledTableBody>    
     </StyledTable>
 
-      {/* Render the add product form */}
-      <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        const target = e.target as HTMLFormElement;
-        const newProduct: NewProduct = {
-          name: (target.elements.namedItem('name') as HTMLInputElement).value,
-          quantity: parseInt((target.elements.namedItem('quantity') as HTMLInputElement).value),
-          price: parseFloat((target.elements.namedItem('price') as HTMLInputElement).value),
-          description: (target.elements.namedItem('description') as HTMLInputElement).value,
-          imageUrl: (target.elements.namedItem('imageUrl') as HTMLInputElement).value,
-        };
-        handleAddProduct(newProduct);
-      }}
-      >
-      
-      </form>
+      {/* Render the add product button */}
+      <button onClick={() => setShowModal(true)}>Add Product</button>
+
+      {/* Render the add product modal */}
+      <ProductAddComponent
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        onAdd={handleAddProduct}
+        categories={categories}
+      />
     </div>
   );
 };

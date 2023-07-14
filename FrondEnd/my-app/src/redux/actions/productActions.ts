@@ -26,8 +26,9 @@ export const addProduct = (newProduct: NewProduct) => ({
   payload: newProduct,
 });
 
-export const addProductSuccess = () => ({
+export const addProductSuccess = (newProduct: NewProduct) => ({
   type: ADD_PRODUCT_SUCCESS,
+  payload: newProduct,
 });
 
 export const updateProduct = (updatedProduct: Product) => ({

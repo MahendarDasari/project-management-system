@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Product } from '../redux/types';
+import { Category, Product } from '../redux/types';
 import { Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from '@mui/material';
 import ProductModelComponent from './ProductModelComponent';
 
@@ -8,9 +8,10 @@ interface Props {
   product: Product;
   onUpdate: (product: Product) => void;
   onDelete: (productId: string) => void;
+  categories: Category[];
 }
 
-const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete }) =>
+const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete ,categories }) =>
  {
 
   const [selectedProduct,setSelectedProduct] = useState({});
@@ -20,7 +21,7 @@ const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete }) =>
     setSelectedProduct(product);
     setOpen(true);
     console.log("product",product);
-   <ProductModelComponent product={product} onUpdate={onUpdate} />
+   <ProductModelComponent product={product} onUpdate={onUpdate} categories={categories} />
    
   };
     
@@ -40,7 +41,7 @@ const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete }) =>
       <TableCell>{product.quantity}</TableCell>
       <TableCell>{product.price}</TableCell>
       <TableCell>{product.description}</TableCell>
-      <TableCell><ProductModelComponent product={product} onUpdate={onUpdate} /></TableCell>
+      <TableCell><ProductModelComponent product={product} onUpdate={onUpdate} categories={categories} /></TableCell>
     </TableRow>
   );
 };

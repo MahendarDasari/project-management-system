@@ -35,9 +35,9 @@ function* addProductSaga(action: any) {
     // Get the new product data from the action payload
     const newProduct: NewProduct = action.payload;
     // Make the API call to add the product
-    yield call(productService.addProduct, newProduct);
+    const prod: Product = yield call(productService.addProduct, newProduct);
     // Dispatch the success action
-    yield put(addProductSuccess());
+    yield put(addProductSuccess(prod));
   } catch (error) {
     // Handle any errors
     console.error('Error adding product:', error);
