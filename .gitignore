@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/project-management-system/FileContentIndex
+/BackEnd/.vs
+/BackEnd/ProductManagement/.vs/ProductManagement
+/BackEnd/ProductManagement/bin/Debug/net6.0
+/.vs/project-management-system/v17
+/.vs
