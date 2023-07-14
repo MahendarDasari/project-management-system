@@ -8,3 +8,4 @@
 /BackEnd/ProductManagement/bin/Debug/net6.0
 /.vs/project-management-system/v17
 /.vs
+BackEnd/ProductManagement/obj/*

@@ -1,0 +1,30 @@
+.product-list {
+    margin-top: 20px;
+  }
+  
+  .product-list form {
+    margin-top: 20px;
+  }
+  
+  .product-list input,
+  .product-list button {
+    margin: 5px;
+  }
+  
+  .product-list button {
+    padding: 5px 10px;
+  }
+  
+  .product-list .product {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+  }
+  
+
+  .product-list-container {
+    height: 400px; /* Adjust the height as needed */
+    overflow: auto Y;
+  }
+  
