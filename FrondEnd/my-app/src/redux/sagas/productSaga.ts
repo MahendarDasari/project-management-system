@@ -51,7 +51,7 @@ function* updateProductSaga(action: any) {
     // Make the API call to update the product
     yield call(productService.updateProduct, updatedProduct);
     // Dispatch the success action
-    yield put(updateProductSuccess());
+    yield put(updateProductSuccess(updatedProduct));
   } catch (error) {
     // Handle any errors
     console.error('Error updating product:', error);

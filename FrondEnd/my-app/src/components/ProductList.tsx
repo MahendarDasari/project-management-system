@@ -97,6 +97,7 @@ const ProductList: React.FC = () => {
           quantity: parseInt((target.elements.namedItem('quantity') as HTMLInputElement).value),
           price: parseFloat((target.elements.namedItem('price') as HTMLInputElement).value),
           description: (target.elements.namedItem('description') as HTMLInputElement).value,
+          imageUrl: (target.elements.namedItem('imageUrl') as HTMLInputElement).value,
         };
         handleAddProduct(newProduct);
       }}

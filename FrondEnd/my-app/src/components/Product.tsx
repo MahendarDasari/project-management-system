@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Product } from '../redux/types';
 import { Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from '@mui/material';
+import ProductModelComponent from './ProductModelComponent';
+
+
 interface Props {
   product: Product;
   onUpdate: (product: Product) => void;
   onDelete: (productId: string) => void;
 }
 
-const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete }) => {
-  const handleUpdate = () => {
-    // Handle update logic
-    onUpdate(product);
+const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete }) =>
+ {
+
+  const [selectedProduct,setSelectedProduct] = useState({});
+  const [open, setOpen] = useState(false);
+
+  const handleUpdate = (product: Product) =>  {
+    setSelectedProduct(product);
+    setOpen(true);
+    console.log("product",product);
+   <ProductModelComponent product={product} onUpdate={onUpdate} />
+   
   };
+    
+  
 
   const handleDelete = () => {
     // Handle delete logic
@@ -19,13 +32,15 @@ const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete }) => {
   };
 
   return (
-    <TableRow>
+
+    <TableRow> 
+        
     <TableCell>{product.id}</TableCell>
       <TableCell>{product.name}</TableCell>
       <TableCell>{product.quantity}</TableCell>
       <TableCell>{product.price}</TableCell>
       <TableCell>{product.description}</TableCell>
-      <TableCell><Button variant="contained" color="success" onClick={handleUpdate}>Edit</Button></TableCell>
+      <TableCell><ProductModelComponent product={product} onUpdate={onUpdate} /></TableCell>
     </TableRow>
   );
 };

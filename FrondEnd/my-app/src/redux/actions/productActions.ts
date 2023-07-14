@@ -35,8 +35,9 @@ export const updateProduct = (updatedProduct: Product) => ({
   payload: updatedProduct,
 });
 
-export const updateProductSuccess = () => ({
+export const updateProductSuccess = (updatedProduct: Product) => ({
   type: UPDATE_PRODUCT_SUCCESS,
+  payload: updatedProduct,
 });
 
 export const deleteProduct = (productId: string) => ({

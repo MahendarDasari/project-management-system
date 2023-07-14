@@ -16,7 +16,7 @@ import { Product } from '../types';
       case FETCH_PRODUCTS_SUCCESS:
         return action.payload;
       case ADD_PRODUCT_SUCCESS:
-        return [...state, action.payload];
+        return [...state, action.payload];      
       case UPDATE_PRODUCT_SUCCESS:
         return state.map((product: Product) =>
           product.id === action.payload.id ? action.payload : product
@@ -27,6 +27,8 @@ import { Product } from '../types';
         return state;
     }
   };
+
+  
   
   export default productReducer;
   

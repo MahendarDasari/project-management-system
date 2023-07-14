@@ -4,6 +4,7 @@ export interface Product {
     quantity: number;
     price: number;
     description: string;
+    imageUrl: string;
   }
   
   export interface NewProduct {
@@ -11,6 +12,7 @@ export interface Product {
     quantity: number;
     price: number;
     description: string;
+    imageUrl: string;
   }
   
   export interface RootState {

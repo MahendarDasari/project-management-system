@@ -15,7 +15,7 @@ class ProductService {
 
   updateProduct(updatedProduct: Product): Promise<void> {
     const { id, ...productData } = updatedProduct;
-    return axios.put(`${this.apiEndpoint}/${id}`, productData);
+    return axios.put(`http://localhost:5159/api/products/${id}`, updatedProduct);
   }
 
   deleteProduct(productId: number): Promise<void> {
