@@ -25,6 +25,7 @@ import {
 import { styled } from '@mui/system';
 import './ProductList.css';
 import { fetchCategories } from '../redux/actions/categoryActions';
+import ProductAddComponent from './ProductAddComponent';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   fontWeight: 'bold',
@@ -50,7 +51,7 @@ const ProductList: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products);
   const categories = useSelector((state: RootState) => state.categories);
-
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // State for delete confirmation dialog
   const [showModal, setShowModal] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [subcategoryFilter, setSubcategoryFilter] = useState<string>('');
@@ -104,6 +105,8 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="product-list-container">
+      
+      
       <div className="filter-container">
         <FormControl>
           <InputLabel>Category</InputLabel>
@@ -140,17 +143,26 @@ const ProductList: React.FC = () => {
             </Select>
           </FormControl>
         )}
+        <Button
+        className="add-product-button"
+        variant="contained"
+        
+        onClick={() => setShowModal(true)}
+      >
+        Add Product
+      </Button>
       </div>
 
       <StyledTable>
         <StyledTableHead>
-          <TableRow>
+          <TableRow>            
             <StyledTableCell>Code</StyledTableCell>
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell>Quantity</StyledTableCell>
             <StyledTableCell>Price</StyledTableCell>
             <StyledTableCell>Description</StyledTableCell>
             <StyledTableCell>Actions</StyledTableCell>
+            <StyledTableCell>Delete</StyledTableCell>
           </TableRow>
         </StyledTableHead>
         <StyledTableBody>
@@ -166,13 +178,13 @@ const ProductList: React.FC = () => {
         </StyledTableBody>
       </StyledTable>
 
-      <Button
-        className="add-product-button"
-        variant="contained"
-        onClick={() => setShowModal(true)}
-      >
-        Add Product
-      </Button>
+     
+      <ProductAddComponent
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        onAdd={handleAddProduct}
+        categories={categories}
+      />
 
     </div>
   );

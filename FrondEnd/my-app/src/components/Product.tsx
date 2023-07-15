@@ -42,6 +42,7 @@ const ProductComponent: React.FC<Props> = ({ product, onUpdate, onDelete ,catego
       <TableCell>{product.price}</TableCell>
       <TableCell>{product.description}</TableCell>
       <TableCell><ProductModelComponent product={product} onUpdate={onUpdate} categories={categories} /></TableCell>
+      <TableCell><Button variant="contained" color="error" onClick={handleDelete}>Delete</Button></TableCell>
     </TableRow>
   );
 };

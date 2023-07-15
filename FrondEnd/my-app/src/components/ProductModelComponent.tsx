@@ -34,15 +34,6 @@ const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, 
     }));
   };
 
-  // const handleCategoryChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-  //   const categoryId = e.target.value as number;
-  //   setUpdatedProduct((prevProduct) => ({
-  //     ...prevProduct,
-  //     categoryId,
-  //     subcategoryId: null,
-  //   }));
-  // };
-
   const handleSubcategoryChange = (e: React.ChangeEvent<{ value: unknown }>) => {
     const subcategoryId = e.target.value as number;
     setUpdatedProduct((prevProduct) => ({
@@ -117,13 +108,21 @@ const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, 
                 </Select>
               </FormControl>
             </Grid>
+            <Grid item xs={12}>
+              <Grid container justifyContent="flex-end" spacing={2}>
+                <Grid item>
+                  <Button variant="contained" onClick={handleSave}>
+                    Save
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" onClick={handleClose} color="error">
+                    Cancel
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
-          <Button variant="contained" onClick={handleSave}>
-            Save
-          </Button>
-          <Button variant="contained" onClick={handleClose}>
-            Cancel
-          </Button>
         </div>
       </Modal>
     </>

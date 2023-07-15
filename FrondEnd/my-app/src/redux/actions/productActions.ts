@@ -46,6 +46,7 @@ export const deleteProduct = (productId: string) => ({
   payload: productId,
 });
 
-export const deleteProductSuccess = () => ({
+export const deleteProductSuccess = (productId : number) => ({
   type: DELETE_PRODUCT_SUCCESS,
+  payload: productId,
 });

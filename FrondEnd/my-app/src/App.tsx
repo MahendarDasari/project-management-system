@@ -6,13 +6,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { useDispatch, useSelector } from 'react-redux';
 
-
-
-const App: React.FC = () => {
-  const dispatch = useDispatch();
- 
+const App: React.FC = () => { 
   return (
     <div>
     <Box sx={{ flexGrow: 1 }} >
@@ -26,8 +21,7 @@ const App: React.FC = () => {
           aria-label="menu"
           sx={{ mr: 2 }}
         >          
-        </IconButton>
-        
+        </IconButton>        
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Product List
         </Typography>       

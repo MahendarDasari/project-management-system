@@ -19,7 +19,7 @@ class ProductService {
   }
 
   deleteProduct(productId: number): Promise<void> {
-    return axios.delete(`'http://localhost:5159/api/products'/${productId}`);
+    return axios.delete(`http://localhost:5159/api/products/${productId}`);
   }
 }
 

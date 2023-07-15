@@ -65,7 +65,7 @@ function* deleteProductSaga(action: any) {
     // Make the API call to delete the product
     yield call(productService.deleteProduct, productId);
     // Dispatch the success action
-    yield put(deleteProductSuccess());
+    yield put(deleteProductSuccess(productId));
   } catch (error) {
     // Handle any errors
     console.error('Error deleting product:', error);

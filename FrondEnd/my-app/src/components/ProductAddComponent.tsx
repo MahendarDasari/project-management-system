@@ -125,13 +125,19 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={6.8} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button variant="contained" onClick={handleAddProduct}>
-              Add
-            </Button>
-            <Button variant="contained" color="error" onClick={onClose}>
-              Cancel
-            </Button>
+          <Grid item xs={12}>
+            <Grid container justifyContent="flex-end" spacing={2}>
+              <Grid item>
+                <Button variant="contained" onClick={handleAddProduct}>
+                  Add
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button variant="contained" color="error" onClick={onClose}>
+                  Cancel
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </div>
