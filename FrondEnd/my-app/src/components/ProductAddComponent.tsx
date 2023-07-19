@@ -20,6 +20,11 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
     subcategoryId: 0,
   });
 
+  const [nameError, setNameError] = useState(false);
+  const [quantityError, setQuantityError] = useState(false);
+  const [priceError, setPriceError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewProduct((prevProduct) => ({
@@ -62,7 +67,43 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
     : null;
 
   const handleAddProduct = () => {
+    // Reset all error states
+    setNameError(false);
+    setQuantityError(false);
+    setPriceError(false);
+    setDescriptionError(false);
+
+    // Validate fields
+    let hasError = false;
+
+    if (newProduct.name === '') {
+      setNameError(true);
+      hasError = true;
+    }
+
+    if (isNaN(newProduct.quantity) || newProduct.quantity <= 0) {
+      setQuantityError(true);
+      hasError = true;
+    }
+
+    if (isNaN(newProduct.price) || newProduct.price <= 0) {
+      setPriceError(true);
+      hasError = true;
+    }
+
+    if (newProduct.description === '') {
+      setDescriptionError(true);
+      hasError = true;
+    }
+
+    if (hasError) {
+      return;
+    }
+
+    // Add the product
     onAdd(newProduct);
+
+    // Reset the form
     setNewProduct({
       name: '',
       quantity: 0,
@@ -74,13 +115,44 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
     });
   };
 
+  const handleCancel = () => {
+    // Reset all error states
+    setNameError(false);
+    setQuantityError(false);
+    setPriceError(false);
+    setDescriptionError(false);
+
+    // Clear the form
+    setNewProduct({
+      name: '',
+      quantity: 0,
+      price: 0,
+      imageUrl: '',
+      description: '',
+      categoryId: 0,
+      subcategoryId: 0,
+    });
+
+    // Close the modal
+    onClose();
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className="modal-container">
         <h2>Add Product</h2>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <TextField label="Name" name="name" value={newProduct.name} onChange={handleInputChange} fullWidth />
+            <TextField
+              label="Name"
+              name="name"
+              value={newProduct.name}
+              onChange={handleInputChange}
+              error={nameError}
+              onBlur={() => setNameError(newProduct.name === '')}
+              helperText={nameError ? 'Name is required' : ''}
+              fullWidth
+            />
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -88,6 +160,9 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
               name="quantity"
               value={newProduct.quantity}
               onChange={handleInputChange}
+              error={quantityError}
+              onBlur={() => setQuantityError(isNaN(newProduct.quantity) || newProduct.quantity <= 0)}
+              helperText={quantityError ? 'Quantity should be a positive number' : ''}
               fullWidth
             />
           </Grid>
@@ -97,6 +172,9 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
               name="price"
               value={newProduct.price}
               onChange={handleInputChange}
+              error={priceError}
+              onBlur={() => setPriceError(isNaN(newProduct.price) || newProduct.price <= 0)}
+              helperText={priceError ? 'Price should be a positive number' : ''}
               fullWidth
             />
           </Grid>
@@ -106,6 +184,9 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
               name="description"
               value={newProduct.description}
               onChange={handleInputChange}
+              error={descriptionError}
+              onBlur={() => setDescriptionError(newProduct.description === '')}
+              helperText={descriptionError ? 'Description is required' : ''}
               fullWidth
             />
           </Grid>
@@ -133,7 +214,7 @@ const ProductAddComponent: React.FC<ProductAddComponentProps> = ({ open, onClose
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="error" onClick={onClose}>
+                <Button variant="contained" color="error" onClick={handleCancel}>
                   Cancel
                 </Button>
               </Grid>

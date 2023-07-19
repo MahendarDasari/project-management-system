@@ -9,3 +9,6 @@
 /.vs/project-management-system/v17
 /.vs
 BackEnd/ProductManagement/obj/*
+BackEnd/ProductManagement/.vs/ProjectEvaluation/productmanagement.projects.v5.2
+.gitignore
+BackEnd/ProductManagement/.vs/ProjectEvaluation/productmanagement.metadata.v5.2
