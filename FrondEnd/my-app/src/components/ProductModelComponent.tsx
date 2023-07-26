@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, TextField, Grid, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Button, Modal, TextField, Grid, MenuItem, Select, FormControl, InputLabel,styled } from '@mui/material';
 import { Product, Category, Subcategory } from '../redux/types';
 import './ProductModelComponent.css'; // Import the CSS file
 
@@ -8,6 +8,17 @@ interface ProductModelComponentProps {
   onUpdate: (updatedProduct: Product) => void;
   categories: Category[];
 }
+
+
+const CustomButton = styled(Button)({
+  // blue hex code is #0071BC
+  backgroundColor: '#FFFFFF', //replace 'colorcode' with your specific color code
+  color: 'black',
+  '&:hover': {
+    backgroundColor: '#0071BC', //replace 'hovercolorcode' with your specific hover color code
+  },
+});
+
 
 const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, onUpdate, categories }) => {
   const [open, setOpen] = useState(false);
@@ -44,9 +55,9 @@ const ProductModelComponent: React.FC<ProductModelComponentProps> = ({ product, 
 
   return (
     <>
-      <Button variant="outlined" onClick={handleOpen}>
+      <CustomButton onClick={handleOpen}>
         View Details
-      </Button>
+      </CustomButton>
       <Modal open={open} onClose={handleClose} className="modal">
         <div className="modal-container">
           <h2>Product Details</h2>
