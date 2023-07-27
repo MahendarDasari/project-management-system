@@ -13,11 +13,10 @@ interface Props {
 
 
 const CustomButton = styled(Button)({
-  // white color hexc
-  backgroundColor: '#FFFFFF', //replace 'colorcode' with your specific color code
+  backgroundColor: '#FFFFFF', 
   color: 'black',
   '&:hover': {
-    backgroundColor: '#hovercolorcode', //replace 'hovercolorcode' with your specific hover color code
+    backgroundColor: '#hovercolorcode', 
   },
 });
 
